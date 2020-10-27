@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import UserCard from './UserCard';
+import Header from './Header';
 
 class App extends React.Component {
 
@@ -22,7 +23,8 @@ class App extends React.Component {
       this.setState({
          name: res.data.name,
          user: res.data.user,
-         pictureurl: res.data.avatar_url
+         pictureurl: res.data.avatar_url,
+         followers: res.data.followers
         })
     })
     .catch(err => {
@@ -31,7 +33,12 @@ class App extends React.Component {
   };
 
   render() {
-    return (<UserCard avatar={this.state.pictureurl} name={this.state.name}/>);
+    return (
+      <>
+      <Header />
+      <UserCard followers={this.state.followers} avatar={this.state.pictureurl} name={this.state.name}/>
+      </>
+      )
   }
 }
 
