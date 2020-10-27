@@ -1,16 +1,37 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import UserCard from './UserCard';
 
 class App extends React.Component {
 
-
-  componentDidMount() {
-    console.log('hey');
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      user: ""
+    }
+   
   }
 
+
+  componentDidMount() {
+    console.log('inside componentDidMount');
+    axios.get('https://api.github.com/users/eg180')
+    .then(res => {
+      this.setState({
+         name: res.data.name,
+         user: res.data.user,
+         pictureurl: res.data.avatar_url
+        })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  };
+
   render() {
-    return (<h1>Testing</h1>);
+    return (<UserCard avatar={this.state.pictureurl} name={this.state.name}/>);
   }
 }
 
