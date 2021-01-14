@@ -7,7 +7,7 @@ server.use(express.json())
 
 server.get("/", (req, res) => {
   res.status(200).json({
-    api: "down",
+    api: "up",
     environment: process.env.NODE_ENV,
   })
 })
